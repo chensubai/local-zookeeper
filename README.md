@@ -56,3 +56,28 @@ We always welcome new contributors to the project! See [How to Contribute](https
 [mcLink]: https://zookeeper.apache.org/releases
 [trBadge]: https://travis-ci.org/apache/zookeeper.svg?branch=master
 [trLink]: https://travis-ci.org/apache/zookeeper
+# 部署步骤
+````
+vim conf/zoo.cfg 
+修改为真实服务器ip
+server.1=xxx.1 :2888:3888
+server.2=xxx.2:2888:3888
+server.3=xxx.3:2888:3888
+保存退出
+在各自对应的服务目录中运行
+mkdir -p data
+#server1服务器中
+echo 1 > data/myid
+#server2服务器中
+echo 2 > data/myid
+#server3服务器中
+echo 3 > data/myid
+
+在各自服务器 中运行 bin/zkServer.sh start 
+bin/zkServer.sh status 查看运行状态
+出现以下内容为成功
+ZooKeeper JMX enabled by default
+Using config: /usr/local/cluster-zookeeper/bin/../conf/zoo.cfg
+Client port found: 2181. Client address: localhost. Client SSL: false.
+Mode: leader
+
